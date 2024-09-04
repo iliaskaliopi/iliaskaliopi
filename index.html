@@ -146,8 +146,55 @@
             width: auto;
             margin: 0;
         }
+          @keyframes fall {
+            0% { transform: translateY(-100px) rotate(0deg); }
+            100% { transform: translateY(100vh) rotate(360deg); }
+        }
 
+        .flower {
+            position: absolute;
+            top: -100px;
+            width: 60px;
+            height: 30px;
+            background-image: url('flower.png'); /* Replace with your flower image */
+            background-size: cover;
+            animation: fall linear infinite;
+            opacity: 0.9;
+        }
+
+        .wflower {
+            position: absolute;
+            top: -100px;
+            width: 30px;
+            height: 70px;
+            background-image: url('wflower.png'); /* Replace with your flower image */
+            background-size: cover;
+            animation: fall linear infinite;
+            opacity: 0.9;
+        }
         @media (max-width: 700px) {
+            .flower {
+                position: absolute;
+                top: -100px;
+                width: 40px;
+                height: 20px;
+                background-image: url('flower.png'); /* Replace with your flower image */
+                background-size: cover;
+                animation: fall linear infinite;
+                opacity: 0.9;
+            }
+
+            .wflower {
+                position: absolute;
+                top: -100px;
+                width: 20px;
+                height: 47px;
+                background-image: url('wflower.png'); /* Replace with your flower image */
+                background-size: cover;
+                animation: fall linear infinite;
+                opacity: 0.9;
+            }
+
             .radio-group, .number-group {
                 flex-wrap: wrap;
             }
@@ -192,32 +239,7 @@
 
         }
 
-        @keyframes fall {
-            0% { transform: translateY(-100px) rotate(0deg); }
-            100% { transform: translateY(100vh) rotate(360deg); }
-        }
 
-        .flower {
-            position: absolute;
-            top: -100px;
-            width: 60px;
-            height: 30px;
-            background-image: url('flower.png'); /* Replace with your flower image */
-            background-size: cover;
-            animation: fall linear infinite;
-            opacity: 0.9;
-        }
-
-        .wflower {
-            position: absolute;
-            top: -100px;
-            width: 30px;
-            height: 70px;
-            background-image: url('wflower.png'); /* Replace with your flower image */
-            background-size: cover;
-            animation: fall linear infinite;
-            opacity: 0.9;
-        }
     </style>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 
@@ -249,14 +271,14 @@
         }
 
         function startFlowerAnimation() {
-            const interval =setInterval(createFlower, 150);
+            const interval =setInterval(createFlower, 250);
 
             setTimeout(() => {
                 clearInterval(interval);
             }, 15000);
         }
         function startFlowerAnimation2() {
-            const interval =setInterval(createFlower2, 150);
+            const interval =setInterval(createFlower2, 250);
 
             setTimeout(() => {
                 clearInterval(interval);
