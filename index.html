@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ffe3e3-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Wedding Invitation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #E6E6E6;
+            color: #333;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .header, .introduction, .family {
+            font-family: 'Times new Roman';
+            font-size: 22px;
+        }
+         .form-group {
+            margin-bottom: 15px;
+        }
+
+        .container {
+             text-align: center; /* Optional: center text */
+             align-items: center;
+              height: auto;
+              background-image: url('midback.png');
+              background-size: 100% 100%;
+              background-position: center;
+              background-repeat: no-repeat;
+              position: relative; /* Ensures the padding trick works */
+        }
+        .formobilegap{
+        }
+
+
+        .question-group {
+
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .radio-group, .number-group {
+            margin-right: 20px;
+        }
+
+        .radio-group label, .number-group label {
+            margin-right: 10px;
+        }
+
+        .radio-group input, .number-group input {
+            margin-left: 5px;
+        }
+        .rsvp, .event-details, .gift-info {
+            background-color: #CAF4FF;
+        }
+        .header {
+            text-align: center;
+            background-color: #CAF4FF;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            height: 450px
+        }
+        .header img {
+            border-radius: 15px;
+        }
+        .family img {
+            width: 100%;
+            max-width: 600px;
+            border-radius: 15px;
+        }
+        .countdown {
+            font-size: 26px;
+            margin-top: 20px;
+            color: #5a94bf;
+        }
+        .introduction, .event-details, .gift-info, .rsvp {
+            padding: 20px;
+            text-align: center;
+        }
+        .introduction{
+            width: 30%;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto;
+        }
+        .family{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            align-items: flex-start;
+        }
+        .map-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            align-items: flex-start;
+        }
+        .map-item {
+            flex: 1 1 45%;
+            max-width: 600px;
+            text-align: center;
+        }
+        .map {
+            width: 100%;
+            height: 300px;
+            margin: 10px 0;
+        }
+        .rsvp form {
+            display: inline-block;
+            text-align: left;
+            max-width: 300px;
+            margin: auto;
+        }
+        .rsvp input, .rsvp textarea, .rsvp select, .rsvp label {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+        }
+        .rsvp button {
+            width: 100%;
+            padding: 10px;
+            background-color: #d9534f;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        .footer {
+            background-color: #EEEEEE;
+            padding: 10px;
+            text-align: center;
+        }
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .toggle-container input {
+            width: auto;
+            margin: 0;
+        }
+
+        @media (max-width: 700px) {
+            .radio-group, .number-group {
+                flex-wrap: wrap;
+            }
+
+            .radio-group label, .number-group label {
+                margin-bottom: 5px;
+            }
+
+            .radio-group input, .number-group input {
+                margin-bottom: 10px;
+            }
+
+            .container {
+             text-align: center; /* Optional: center text */
+              align-items: center;
+              height: auto;
+              background-image: url('midback2.png');
+              background-size: 100% 100%;
+              background-position: center;
+              background-repeat: no-repeat;
+              position: relative; /* Ensures the padding trick works */
+              }
+
+              .formobilegap{
+                width: 100%; /* Set width to 100% of parent div */
+                height: 50%; /* Set height to 30% of parent div */
+                position: absolute;
+                top: 0;
+              }
+              .introduction{
+                    width: 70%;
+                    justify-content: center;
+                    align-items: center;
+                    padding-top: 100%;
+                }
+
+        .family img {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 15px;
+        }
+
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-100px) rotate(0deg); }
+            100% { transform: translateY(100vh) rotate(360deg); }
+        }
+
+        .flower {
+            position: absolute;
+            top: -100px;
+            width: 60px;
+            height: 30px;
+            background-image: url('flower.png'); /* Replace with your flower image */
+            background-size: cover;
+            animation: fall linear infinite;
+            opacity: 0.9;
+        }
+
+        .wflower {
+            position: absolute;
+            top: -100px;
+            width: 30px;
+            height: 70px;
+            background-image: url('wflower.png'); /* Replace with your flower image */
+            background-size: cover;
+            animation: fall linear infinite;
+            opacity: 0.9;
+        }
+    </style>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+    <script>
+        function createFlower() {
+            const flower = document.createElement('div');
+            flower.classList.add('flower');
+            flower.style.left = `${Math.random() * 100}vw`;
+            flower.style.animationDuration = `${Math.random() * 3 + 2}s`;
+            flower.style.animationDelay = `${Math.random() * 2}s`;
+            document.body.appendChild(flower);
+
+            setTimeout(() => {
+                flower.remove();
+            }, 5000); // Remove flower after animation completes
+        }
+
+        function createFlower2() {
+            const flower = document.createElement('div');
+            flower.classList.add('wflower');
+            flower.style.left = `${Math.random() * 100}vw`;
+            flower.style.animationDuration = `${Math.random() * 3 + 2}s`;
+            flower.style.animationDelay = `${Math.random() * 2}s`;
+            document.body.appendChild(flower);
+
+            setTimeout(() => {
+                flower.remove();
+            }, 5000); // Remove flower after animation completes
+        }
+
+        function startFlowerAnimation() {
+            const interval =setInterval(createFlower, 150);
+
+            setTimeout(() => {
+                clearInterval(interval);
+            }, 15000);
+        }
+        function startFlowerAnimation2() {
+            const interval =setInterval(createFlower2, 150);
+
+            setTimeout(() => {
+                clearInterval(interval);
+            }, 15000);
+        }
+        startFlowerAnimation();
+        startFlowerAnimation2();
+    </script>
+
+    <style>
+        .slider {
+            position: relative;
+            object-fit: contain;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%; /* Adjust width as needed */
+            height: 300px;
+
+        }
+
+        .slides {
+            position: absolute;
+            opacity: 0;
+            max-width: 100%; /* Ensure the image doesn’t exceed slider width */
+            max-height: 100%;
+            object-fit: contain;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .slides.active {
+            opacity: 1;
+
+        }
+        h2 {
+            margin: 20px 0; /* Add margin to separate from slider */
+        }
+        @media (max-width: 800px) {
+            .header{
+                height: 550px;
+            }
+            .slider {
+                position: relative;
+                overflow: hidden;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 100%; /* Adjust width as needed */
+                height: 300px;
+            }
+
+        }
+
+    </style>
+
+
+
+</head>
+<body>
+
+<div class="header">
+        <br>
+        <div class="slider">
+            <img class="slides" src="photos/image0.jpg" alt="Image 0">
+            <img class="slides" src="photos/image1.jpg" alt="Image 1">
+            <img class="slides" src="photos/image2.jpg" alt="Image 2">
+            <img class="slides" src="photos/image3.jpg" alt="Image 3">
+            <img class="slides" src="photos/image4.jpg" alt="Image 4">
+        </div>
+        <h2>Καλωσήρθατε στο προσκλητήριο του Γάμου μας!</h2>
+        <div class="countdown" id="countdown"></div>
+ </div>
+
+<script>
+        let currentIndex = 0;
+        const slides = document.querySelectorAll('.slides');
+        const totalSlides = slides.length;
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.remove('active');
+                if (i === index) {
+                    slide.classList.add('active');
+                }
+            });
+        }
+
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % totalSlides;
+            showSlide(currentIndex);
+        }
+
+        // Initialize the slider
+        showSlide(currentIndex);
+
+        // Change slide every 3 seconds
+        setInterval(nextSlide, 3000);
+    </script>
+
+<div class="container" >
+    <div class="formobilegap">
+
+    </div>
+    <div class="introduction">
+        <h3>[KALESMENOS]</h3>
+        <h3>Με μεγάλη χαρά σας προσκαλούμε στο γάμο μας </h3>
+        <h3> Θα είναι τιμή μας να παρευρεθείτε στην ιδιαίτερη μέρα μας.</h3>
+    </div>
+    <div class="family">
+         <img src="small-image.jpg" alt="Wedding Image">
+    </div>
+</div>
+
+
+
+
+
+<br>
+
+<div class="event-details">
+    <h2>Πληροφορίες</h2>
+    <div class="map-container">
+        <div class="map-item">
+            <p><strong>Μυστήριο του Γάμου</strong></p>
+            <p>Τοποθεσία: Όνομα Εκκλησίας Θάσος</p>
+            <p><a href="https://maps.app.goo.gl/vG68ZdyFVRbwU2k28">Πατήστε εδώ για να το ανοίξετε στον Χάρτη</a>.</p>
+            <p>Ημερομηνία και ώρα: 27 Σεπτεμβρίου 2025 12:00 </p>
+            <div id="map-church" class="map"></div>
+        </div>
+        <div class="map-item">
+             <p><strong>Κέντρο Εκδήλωσης</strong></p>
+             <p>Τοποθεσία: Το παλιό κλίσμα, Κλίσμα Καλλιράχης, Θάσος</p>
+             <p><a href="https://maps.app.goo.gl/haoZNoEjfZYRJnB26">Πατήστε εδώ για να το ανοίξετε στον Χάρτη</a>.</p>
+              <p>Ημερομηνία και ώρα: 27 Σεπτεμβρίου 2025 17:00 </p>
+            <div id="map-festival" class="map"></div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="gift-info">
+    <p>Προαιρετική λίστα δώρου γάμου, Εθνική, IBAN: GRXXXXXXXXXXXXXXXXXXXXXXX</p>
+</div>
+
+<div class="rsvp" id="change">
+    <div class="form-container">
+    <form id="rsvp-form">
+        <br>
+        <div class="question-group">
+            <label for="message">Ποιά τραγούδια θα θέλατε να ακούσετε;</label>
+            <br>
+            <textarea rows = "5" cols = "60" name = "message" id="message">
+
+            </textarea>
+        </div>
+        <br>
+        <button type="submit">Υποβολή</button>
+    </form>
+    <p id="response-message"></p>
+    </div>
+    <script>
+        const form = document.getElementById('rsvp-form');
+        const responseMessage = document.getElementById('response-message');
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbyYmxKF2_NRJTUlkY6W1vMyK_VSIPXBZIYZn9ZneOgsYLrjvRYRsYH-q9cMdEOQiXhyGw/exec'; // Replace with your Google Apps Script Web App URL
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const formData = new FormData(form);
+            const data = {};
+            data["name"] = "[KALESMENOS]";
+            formData.forEach((value, key) => {
+                data[key] = value;
+                console.log(value)
+                console.log(key)
+            });
+
+            fetch(scriptURL, {
+                method: 'POST',
+                contentType: 'application/json',
+                body: JSON.stringify(data)
+            })
+            .then(response => response.text())
+            .then(result => {
+                responseMessage.textContent = 'Form submitted successfully!';
+                form.reset();
+            })
+            .catch(error => {
+                responseMessage.textContent = 'Error submitting form. Please try again.';
+            });
+             // Get the div element by its ID
+            var divvv = document.getElementById('change');
+
+            // Change the content of the div
+            divvv.innerHTML = 'Ευχαριστούμε για την απάντηση σας!';
+        });
+    </script>
+</div>
+
+
+<div class="footer">
+
+</div>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+    // Countdown Timer
+    const countdown = document.getElementById('countdown');
+    const weddingDate = new Date('2025-09-27T00:00:00'); // Update this with your wedding date and time
+    function updateCountdown() {
+        const now = new Date();
+        const timeLeft = weddingDate - now;
+
+        const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+        countdown.textContent = `${days}  Μέρες   ${hours}  Ώρες  ${minutes}  Λεπτά  ${seconds}  Δευτερόλεπτα`;
+
+        if (timeLeft < 0) {
+            countdown.textContent = 'The wedding has occurred!';
+        }
+    }
+    setInterval(updateCountdown, 1000);
+
+    // Initialize maps
+    const churchMap = L.map('map-church').setView([40.694704,24.554991], 14); // Update with the latitude and longitude of the church
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19
+    }).addTo(churchMap);
+    L.marker([40.694704,24.554991]).addTo(churchMap).bindPopup('Όνομα Εκκλησίας'); // Update with the latitude and longitude of the church
+
+    const festivalMap = L.map('map-festival').setView([40.6921582,24.5259740], 13); // Update with the latitude and longitude of the festival center
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19
+    }).addTo(festivalMap);
+    L.marker([40.6921582,24.5259740]).addTo(festivalMap).bindPopup('Το παλιό κλίσμα'); // Update with the latitude and longitude of the festival center
+</script>
+
+
+
+</body>
+</html>
