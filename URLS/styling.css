@@ -199,13 +199,14 @@ background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/s
 .invitation{
   width: 80vw;
   background-color: rgb(247, 244, 242);
-  border: white solid 1%;
   justify-self: center;
   border-radius: 3%;
   position: relative;
   isolation: isolate;
 }
-
+.invitation {
+  margin: auto;
+}
 .invitation::after {
   content: '';
   position: absolute;
@@ -215,6 +216,36 @@ background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/s
   background-image: url(olivetree.png);
   background-position: center;
   background-size: cover;
+}
+
+section#church-sec {
+    margin: auto;
+    width: 80vw;
+    display: block;
+}
+
+section#party-sec {
+    margin: auto;
+    width: 80vw;
+    display: block;
+}
+
+section#ship-sec {
+    margin: auto;
+    width: 80vw;
+    display: block;
+}
+
+section#gift-sec {
+    margin: auto;
+    width: 80vw;
+    display: block;
+}
+
+section#music-sec {
+    margin: auto;
+    width: 80vw;
+    display: block;
 }
 
 @media screen and (min-width: 800px){
